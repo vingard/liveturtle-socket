@@ -2,6 +2,7 @@ import socket
 from _thread import *
 import turtle
 import threading
+import os
 
 global teams
 global turtles
@@ -36,8 +37,12 @@ def on_new_client(csock, addr):
     csock.close()
 
 def Main():
-    host = "172.16.22.55"
+    host = "127.0.0.1"
     port = 5504
+
+    if not os.path.exists("display"):
+        print("Setting up display cache!")
+        os.makedirs("display")
      
     mySocket = socket.socket()
     mySocket.bind((host,port))

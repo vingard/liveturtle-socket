@@ -17,8 +17,6 @@ def sendCommand():
 def disable_event():
     pass
 
-
-
 def InitilizeUI():
         root = Tk()
         root.geometry("500x500")
