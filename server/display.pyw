@@ -37,7 +37,8 @@ yurtle.color("white")
     
 
 def Main():
-    initUI()
+    #initUI()
+    
     while True:
         displaycache = os.listdir("display/")
         time.sleep(.2)
