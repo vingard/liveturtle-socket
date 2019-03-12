@@ -45,7 +45,7 @@ def Main():
         print("Setting up display cache!")
         os.makedirs("display")
 
-    ctypes.windll.kernel32.SetConsoleTitleW("liveturtle server")
+    ctypes.windll.kernel32.SetConsoleTitleW("liveturtle server on "+host)
      
     mySocket = socket.socket()
     mySocket.bind((host,port))
