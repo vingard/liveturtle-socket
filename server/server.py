@@ -8,19 +8,20 @@ global turtles
 teams = {}
 turtles = {}
 
-
 def runCode(code, team, addr):
     try:
-        #turtle = turtles[addr]
-        #turtle.color("blue")
         exec(code)
     except:
         print("Error from team "+str(team)+"!")
 
+def display(team, code):
+    file = open("display/"+str(team), "w+")
+    file.write(code)
+    file.close()
+
 def on_new_client(csock, addr):
     print("Connection etablished from: " + str(addr))
     teams[addr] = len(teams) + 1
-    #turtles[addr] = turtle.Turtle()
     
     while True:
         data = csock.recv(8192).decode()
@@ -29,20 +30,21 @@ def on_new_client(csock, addr):
 
         print("Code from team "+str(teams[addr])+": " + str(data))
              
-        data = str(data)    
-        runCode(data, teams[addr], addr)
+        data = str(data)
+
+        display(teams[addr], data)
     csock.close()
 
 def Main():
-    host = "127.0.0.1"
+    host = "172.16.22.55"
     port = 5504
-    #display = turtle.Screen()
      
     mySocket = socket.socket()
     mySocket.bind((host,port))
      
     mySocket.listen(1)
 
+    print("Ensure all clients connect to "+host+".")
     print("Server listening on port 5504!")
 
     while True:
