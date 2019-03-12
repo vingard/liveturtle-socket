@@ -1,8 +1,10 @@
 import socket
 #import tkinter as tk
 from tkinter import *
-host = "127.0.0.1"
+host = "localhost" #This works if client and server are the same machine, it'll need to be changed on the day
 port = 5504
+
+
 
 global mySocket
 global Message
@@ -17,11 +19,9 @@ def sendCommand():
 def disable_event():
     pass
 
-
-
 def InitilizeUI():
         root = Tk()
-        root.geometry("500x500")
+        root.geometry("100x45")
         frame = Frame(root)
         frame.pack()
         root.title("Client")
@@ -30,7 +30,7 @@ def InitilizeUI():
         #root.protocol("WM_DELETE_WINDOW", disable_event)
 
         #Creating Button
-        sendButton = Button(frame, text="Send", width="10", height="2", command=sendCommand)
+        sendButton = Button(frame, text="Send to Board", width="10", height="2", command=sendCommand)
         sendButton.place(x=50, y=0)
         sendButton.pack()
         

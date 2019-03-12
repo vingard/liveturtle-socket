@@ -1,44 +1,35 @@
 import socket
 from _thread import *
-import turtle
 import threading
 
 global teams
-global turtles
 teams = {}
-turtles = {}
 
-def runCode(code, team, addr):
-    try:
-        exec(code)
-    except:
-        print("Error from team "+str(team)+"!")
 
 def display(team, code):
-    file = open("display/"+str(team), "w+")
-    file.write(code)
-    file.close()
+    with open("display/"+str(team), "w+") as file: #Cleaner solution to file handling
+       file.write(code)
+   
 
 def on_new_client(csock, addr):
-    print("Connection etablished from: " + str(addr))
     teams[addr] = len(teams) + 1
+    print("Connection etablished from [%s] as team %s." % (str(addr), str(teams[addr]))) #Added more info to connection string
     
     while True:
         data = csock.recv(8192).decode()
         if not data:
             break
 
-        print("Code from team "+str(teams[addr])+": " + str(data))
-             
         data = str(data)
-
+        print("Code from team "+str(teams[addr])+": " + data)
+             
+    
         display(teams[addr], data)
     csock.close()
 
 def Main():
-    host = "172.16.22.55"
+    host = "localhost"
     port = 5504
-     
     mySocket = socket.socket()
     mySocket.bind((host,port))
      

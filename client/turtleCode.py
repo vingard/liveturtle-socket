@@ -1,8 +1,6 @@
 import turtle
-
-joe = turtle.Turtle()
-joe.backward(50)
-
-joe.circle(500)
-joe.forward(500)
-joe.reset()
+turt = turtle.Turtle()
+turt.color("purple")
+for i in range(8):
+    turt.circle(50)
+    turt.right(45)
