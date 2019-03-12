@@ -38,7 +38,7 @@ def disable_event():
     
 def Main():
     root = Tk()
-    root.resizable(5,40)
+    #root.resizable(False, False)
     root.geometry("5x40")
     app = Window(root)
     #Disabled During Testing as its annoying
@@ -46,7 +46,7 @@ def Main():
     root.configure(background='gold')
     root.lift()
     root.call('wm', 'attributes', '.', '-topmost', True)
-    root.after_idle(root.call, 'wm', 'attributes', '.', '-topmost', False)
+    #root.after_idle(self.root.call, 'wm', 'attributes', '.', '-topmost', False)
     
     root.mainloop()
     
