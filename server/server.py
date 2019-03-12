@@ -7,11 +7,9 @@ import ctypes
 global teams
 teams = {}
 
-
 def display(team, code):
     with open("display/"+str(team), "w+") as file: #Cleaner solution to file handling
        file.write(code)
-   
 
 def on_new_client(csock, addr):
     teams[addr] = len(teams) + 1
@@ -45,6 +43,11 @@ def Main():
 
     print("Ensure all clients connect to "+host+".")
     print("Server listening on port 5504!")
+
+    if host == "localhost" or host == "127.0.0.1":
+        print("You are running the server on localhost! This should only be used in development.")
+        print("THIS MEANS CLIENTS OTHER THAN YOUR COMPUTER CANNOT CONNECT.")
+        print("To run the server properly, set the host to your local IPv4 address.")
 
     while True:
         conn, addr = mySocket.accept()
