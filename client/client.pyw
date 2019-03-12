@@ -24,9 +24,9 @@ class Window(Frame):
         self.master.title("Client")
         self.pack(fill = BOTH, expand = 1)
 
-        sendButton = Button(self, text="Send", width="10", height="2", command=self.sendCommand)
+        sendButton = Button(self, text="Send to whiteboard", width="15", height="2", command=self.sendCommand)
 
-        sendButton.place(x =50, y = 0)
+        sendButton.place(x=0, y=0)
     
     def sendCommand(self):
         message = open('turtleCode.py', 'r').read()
@@ -38,10 +38,16 @@ def disable_event():
     
 def Main():
     root = Tk()
-    root.geometry("500x500")
+    root.resizable(5,40)
+    root.geometry("5x40")
     app = Window(root)
     #Disabled During Testing as its annoying
     #root.protocol("WM_DELETE_WINDOW", disable_event)
+    root.configure(background='gold')
+    root.lift()
+    root.call('wm', 'attributes', '.', '-topmost', True)
+    root.after_idle(root.call, 'wm', 'attributes', '.', '-topmost', False)
+    
     root.mainloop()
     
 if __name__ == '__main__':
