@@ -1,5 +1,5 @@
 import turtle
-<<<<<<< HEAD
+
 turt = turtle.Turtle()
 turt.color("purple")
 for i in range(8):
