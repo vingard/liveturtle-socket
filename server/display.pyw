@@ -13,13 +13,13 @@ def runCode(code, team):
         exec(code)
     except:
         print("Error from team "+str(team)+"!")
+
 def reset():
     print("Reset Screen...")
     display.resetscreen()
 
 yurtle = turtle.Turtle()
 yurtle.color("white")
-print("This is the display client.")
 
 while True:
     displaycache = os.listdir("display/")
