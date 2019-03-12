@@ -20,15 +20,15 @@ def reset():
     turtle.color("white")
 
 
-def initUI():
-    root = Tk()
-    root.geometry("100x45")
-    frame = Frame(root)
-    frame.pack()
-    root.title("Display")
-    resetButton = Button(frame, text="Reset", width="10", height="2", command=reset)
-    resetButton.place(x=50, y=0)
-    resetButton.pack()
+#def initUI(): This all doesn't really work, some take a look while i do my exam lol
+#    root = Tk()
+#    root.geometry("100x45")
+#    frame = Frame(root)
+#    frame.pack()
+#    root.title("Display")
+#    resetButton = Button(frame, text="Reset", width="10", height="2", command=reset)
+#    resetButton.place(x=50, y=0)
+#    resetButton.pack()
 
 yurtle = turtle.Turtle()
 yurtle.color("white")
