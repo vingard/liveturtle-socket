@@ -1,6 +1,6 @@
 import socket
-#import tkinter as tk
 from tkinter import *
+
 host = "127.0.0.1"
 port = 5504
 
@@ -10,33 +10,41 @@ message = "print('Error')"
 mySocket = socket.socket()
 mySocket.connect((host,port))
 
-def sendCommand():
+class Window(Frame):
+
+    def __init__(self, master = None):
+        Frame.__init__(self, master)
+
+        self.master = master
+
+        self.init_window()
+    
+    
+    def init_window(self):
+        self.master.title("Client")
+        self.pack(fill = BOTH, expand = 1)
+
+        sendButton = Button(self, text="Send", width="10", height="2", command=self.sendCommand)
+
+        sendButton.place(x =50, y = 0)
+    
+    def sendCommand(self):
         message = open('turtleCode.py', 'r').read()
-        mySocket.send(message.encode())  
-        
+        mySocket.send(message.encode())
+    
+
 def disable_event():
-    pass
-
-def InitilizeUI():
-        root = Tk()
-        root.geometry("500x500")
-        frame = Frame(root)
-        frame.pack()
-        root.title("Client")
-        
-        #Disabled During Debugging as its annoying
-        #root.protocol("WM_DELETE_WINDOW", disable_event)
-
-        #Creating Button
-        sendButton = Button(frame, text="Send", width="10", height="2", command=sendCommand)
-        sendButton.place(x=50, y=0)
-        sendButton.pack()
-        
-        
-        root.mainloop()
-        
+        pass
+    
 def Main():
-        InitilizeUI()
-        
+    root = Tk()
+    root.geometry("500x500")
+    app = Window(root)
+    #Disabled During Testing as its annoying
+    #root.protocol("WM_DELETE_WINDOW", disable_event)
+    root.mainloop()
+    
 if __name__ == '__main__':
     Main()
+    
+
