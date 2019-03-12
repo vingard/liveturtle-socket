@@ -3,6 +3,7 @@ from _thread import *
 import turtle
 import threading
 import os
+import ctypes
 
 global teams
 global turtles
@@ -43,6 +44,8 @@ def Main():
     if not os.path.exists("display"):
         print("Setting up display cache!")
         os.makedirs("display")
+
+    ctypes.windll.kernel32.SetConsoleTitleW("liveturtle server")
      
     mySocket = socket.socket()
     mySocket.bind((host,port))

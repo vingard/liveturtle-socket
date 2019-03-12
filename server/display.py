@@ -19,6 +19,8 @@ def reset():
 
 yurtle = turtle.Turtle()
 yurtle.color("white")
+print("This is the display client.")
+
 while True:
     displaycache = os.listdir("display/")
     time.sleep(.2)
