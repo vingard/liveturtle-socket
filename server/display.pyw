@@ -19,6 +19,7 @@ def reset():
     display.resetscreen()
     turtle.color("white")
 
+
 def initUI():
     root = Tk()
     root.geometry("100x45")
@@ -28,6 +29,11 @@ def initUI():
     resetButton = Button(frame, text="Reset", width="10", height="2", command=reset)
     resetButton.place(x=50, y=0)
     resetButton.pack()
+
+yurtle = turtle.Turtle()
+yurtle.color("white")
+
+
     
 
 def Main():

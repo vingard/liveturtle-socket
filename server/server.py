@@ -1,6 +1,8 @@
 import socket
 from _thread import *
 import threading
+import os
+import ctypes
 
 global teams
 teams = {}
@@ -30,6 +32,12 @@ def on_new_client(csock, addr):
 def Main():
     host = "localhost"
     port = 5504
+
+    if not os.path.exists("display"):
+        print("Setting up display cache!")
+        os.makedirs("display")
+
+    ctypes.windll.kernel32.SetConsoleTitleW("liveturtle server on "+host)
     mySocket = socket.socket()
     mySocket.bind((host,port))
      
