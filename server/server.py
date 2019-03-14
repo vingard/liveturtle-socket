@@ -70,8 +70,9 @@ def Main():
     #tkroot = initUI()
     while True:
         #tkroot.update()
-        conn, addr = mySocket.accept()
-        
+        conn, addr = mySocket.accept() #The problem here is that mySocket.accept is a blocking function, 
+                                       #and prevents stuff from executing, just like tk.mainloop. So, whichever goes first cucks the other out 
+                                       #of executing. Maybe thread the connections?
         start_new_thread(on_new_client, (conn, addr))
         
 
