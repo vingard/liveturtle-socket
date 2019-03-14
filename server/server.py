@@ -3,13 +3,20 @@ from _thread import *
 import threading
 import os
 import ctypes
-
+from tkinter import *
 global teams
 teams = {}
 
 def display(team, code):
     with open("display/"+str(team), "w+") as file: #Cleaner solution to file handling
        file.write(code)
+
+def reset():
+    with open('display/reset','w+') as reset:
+        reset.write("""display.resetscreen()
+    turtle.color("white")""")
+    print("Reset Screen...")
+    
 
 def on_new_client(csock, addr):
     teams[addr] = len(teams) + 1
@@ -26,6 +33,17 @@ def on_new_client(csock, addr):
     
         display(teams[addr], data)
     csock.close()
+
+def initUI(): 
+    root = Tk()
+    root.geometry("100x45")
+    frame = Frame(root)
+    frame.pack()
+    root.title("Display")
+    resetButton = Button(frame, text="Reset", width="10", height="2", command=reset)
+    resetButton.place(x=50, y=0)
+    resetButton.pack()
+    root.mainloop()
 
 def Main():
     host = "localhost"
@@ -49,6 +67,7 @@ def Main():
         print("THIS MEANS CLIENTS OTHER THAN YOUR COMPUTER CANNOT CONNECT.")
         print("To run the server properly, set the host to your local IPv4 address.")
 
+    initUI()
     while True:
         conn, addr = mySocket.accept()
         
