@@ -43,7 +43,7 @@ def initUI():
     resetButton = Button(frame, text="Reset", width="10", height="2", command=reset)
     resetButton.place(x=50, y=0)
     resetButton.pack()
-    root.mainloop()
+    return root
 
 def Main():
     host = "localhost"
@@ -67,12 +67,14 @@ def Main():
         print("THIS MEANS CLIENTS OTHER THAN YOUR COMPUTER CANNOT CONNECT.")
         print("To run the server properly, set the host to your local IPv4 address.")
 
-    initUI()
+    #tkroot = initUI()
     while True:
+        #tkroot.update()
         conn, addr = mySocket.accept()
         
         start_new_thread(on_new_client, (conn, addr))
         
+
     mySocket.close()
      
 if __name__ == '__main__':

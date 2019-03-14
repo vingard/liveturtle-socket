@@ -1,11 +1,11 @@
 import turtle
 import os
 import time
-import Queue
+import queue
 from tkinter import *
 from _thread import *
 
-processQueue = Queue.Queue()
+processQueue = queue.Queue(10)
 display = turtle.Screen()
 yurtle = turtle.Turtle()
 yurtle.color("white")
@@ -23,9 +23,10 @@ def runCode(code, team):
 
 yurtle = turtle.Turtle()
 yurtle.color("white")
-def displlayOnScreen():
+def displayOnScreen():
     callback = processQueue.get()
-    callback()
+    code, team = callback
+    runCode(code, team)
 
 def checkloop():
     while True:
@@ -44,12 +45,13 @@ def checkloop():
                 code = data.read() 
             os.remove("display/"+file) #Better to remove before executing in case prog is long
             
-            processQueue.put(runCode(code, team))
+            processQueue.put((code,team))
  
 
 def Main():
-    #initUI()
     start_new_thread(checkloop,())
+    displayOnScreen()
+    turtle.exitonclick()
 
     
             
