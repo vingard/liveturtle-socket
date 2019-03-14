@@ -13,8 +13,7 @@ def display(team, code):
 
 def reset():
     with open('display/reset','w+') as reset:
-        reset.write("""display.resetscreen()
-    turtle.color("white")""")
+        reset.write("""display.resetscreen()\nturtle.color("white")""")
     print("Reset Screen...")
     
 
@@ -45,6 +44,12 @@ def initUI():
     resetButton.pack()
     return root
 
+def conmanager(sSocket):
+    while True:
+        conn, addr = sSocket.accept() 
+        start_new_thread(on_new_client, (conn, addr))
+
+
 def Main():
     host = "localhost"
     port = 5504
@@ -67,13 +72,10 @@ def Main():
         print("THIS MEANS CLIENTS OTHER THAN YOUR COMPUTER CANNOT CONNECT.")
         print("To run the server properly, set the host to your local IPv4 address.")
 
-    #tkroot = initUI()
-    while True:
-        #tkroot.update()
-        conn, addr = mySocket.accept() #The problem here is that mySocket.accept is a blocking function, 
-                                       #and prevents stuff from executing, just like tk.mainloop. So, whichever goes first cucks the other out 
-                                       #of executing. Maybe thread the connections?
-        start_new_thread(on_new_client, (conn, addr))
+    tkroot = initUI()
+    start_new_thread(conmanager,(mySocket,))
+    tkroot.mainloop()
+    
         
 
     mySocket.close()

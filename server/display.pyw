@@ -31,9 +31,8 @@ def displayOnScreen():
 def checkloop():
     while True:
         displaycache = os.listdir("display/")
-        time.sleep(.2)
-        #This while loop is the reason the proigram stalls: The for loop is not executed if the dir is empty, and the .2 second wait causes input lockout
-        #until it gets alleviated by a new program. Making the delay longer could help woth this, but i'm not sure about an overall fix :/
+        time.sleep(0.5)
+        #Threading this has prevented lockout
         for file in displaycache:
             try:
                 print(int(file))
@@ -50,8 +49,11 @@ def checkloop():
 
 def Main():
     start_new_thread(checkloop,())
-    displayOnScreen()
-    turtle.exitonclick()
+    while True:
+        displayOnScreen()
+        time.sleep(0.5)
+        turtle.update()
+    
 
     
             
