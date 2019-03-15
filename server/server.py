@@ -13,8 +13,7 @@ def display(team, code):
 
 def reset():
     with open('display/reset','w+') as reset:
-        reset.write("""display.resetscreen()
-    turtle.color("white")""")
+        reset.write("""display.resetscreen()\nturtle.color("white")""")
     print("Reset Screen...")
     
 
@@ -43,7 +42,13 @@ def initUI():
     resetButton = Button(frame, text="Reset", width="10", height="2", command=reset)
     resetButton.place(x=50, y=0)
     resetButton.pack()
-    root.mainloop()
+    return root
+
+def conmanager(sSocket):
+    while True:
+        conn, addr = sSocket.accept() 
+        start_new_thread(on_new_client, (conn, addr))
+
 
 def Main():
     host = "localhost"
@@ -67,12 +72,12 @@ def Main():
         print("THIS MEANS CLIENTS OTHER THAN YOUR COMPUTER CANNOT CONNECT.")
         print("To run the server properly, set the host to your local IPv4 address.")
 
-    initUI()
-    while True:
-        conn, addr = mySocket.accept()
+    tkroot = initUI()
+    start_new_thread(conmanager,(mySocket,))
+    tkroot.mainloop()
+    
         
-        start_new_thread(on_new_client, (conn, addr))
-        
+
     mySocket.close()
      
 if __name__ == '__main__':
