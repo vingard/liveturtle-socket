@@ -1,7 +1,7 @@
 import socket
 from tkinter import *
 
-host = "localhost"
+host = "172.16.22.22"
 port = 5504
 
 global mySocket
