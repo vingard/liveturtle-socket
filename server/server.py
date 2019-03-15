@@ -51,7 +51,7 @@ def conmanager(sSocket):
 
 
 def Main():
-    host = "localhost"
+    host = "172.16.22.22"
     port = 5504
 
     if not os.path.exists("display"):
