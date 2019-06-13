@@ -1,4 +1,6 @@
 import turtle
-
 x = turtle.Turtle()
-x.forward(200)
+
+for i in range(4):
+    x.fd(200)
+    x.right(90)

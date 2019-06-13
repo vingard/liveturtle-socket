@@ -3,11 +3,7 @@ from tkinter import *
 
 port = 5504
 
-
-
-
-
-    
+ 
 
 class popup(Tk):
     def __init__(self, master = None):
@@ -75,7 +71,6 @@ def Main():
     try:
         while True:
             app.update()
-            root.update()
     except:
         root.mainloop()
     
