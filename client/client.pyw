@@ -1,14 +1,35 @@
 import socket
 from tkinter import *
 
-host = "172.16.22.22"
 port = 5504
 
-global mySocket
-global Message
-message = "print('Error')"
-mySocket = socket.socket()
-mySocket.connect((host,port))
+
+
+
+
+    
+
+class popup(Tk):
+    def __init__(self, master = None):
+        super().__init__()
+        fr =Frame(self)
+        lab = Label(fr, text="Enter Host IP:")
+        box = Entry(fr)
+        ok = Button(fr, text="Ok", command = lambda: self.getip(box.get()))
+        fr.pack()
+        lab.grid(row = 0, column = 0)
+        box.grid(row = 0, column = 1)
+        ok.grid(row = 1, column = 1)
+
+    def getip(self, entry):
+        global host
+        host = entry
+        global mySocket
+        global Message
+        message = "print('Error')"
+        mySocket = socket.socket()
+        mySocket.connect((host,port))
+        self.destroy()
 
 class Window(Frame):
 
@@ -42,7 +63,8 @@ def Main():
     
     root.resizable(False, False)
     root.geometry("115x40")
-    app = Window(root)
+    app = popup()
+    sender = Window(root)
     #Disabled During Testing as its annoying
     #root.protocol("WM_DELETE_WINDOW", disable_event)
     
@@ -50,7 +72,12 @@ def Main():
     root.call('wm', 'attributes', '.', '-topmost', True)
     #root.after_idle(self.root.call, 'wm', 'attributes', '.', '-topmost', False)
     
-    root.mainloop()
+    try:
+        while True:
+            app.update()
+            root.update()
+    except:
+        root.mainloop()
     
 if __name__ == '__main__':
     Main()

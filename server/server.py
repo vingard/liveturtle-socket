@@ -49,16 +49,30 @@ def conmanager(sSocket):
         conn, addr = sSocket.accept() 
         start_new_thread(on_new_client, (conn, addr))
 
+def get_ip():
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    try:
+        # doesn't even have to be reachable
+        s.connect(('10.255.255.255', 1))
+        IP = s.getsockname()[0]
+    except:
+        IP = '127.0.0.1'
+    finally:
+        s.close()
+    return IP
+
 
 def Main():
-    host = "172.16.22.22"
+    host = get_ip() 
     port = 5504
 
     if not os.path.exists("display"):
         print("Setting up display cache!")
         os.makedirs("display")
-
-    ctypes.windll.kernel32.SetConsoleTitleW("liveturtle server on "+host)
+    try:
+        ctypes.windll.kernel32.SetConsoleTitleW("liveturtle server on "+host)
+    except:
+        pass 
     mySocket = socket.socket()
     mySocket.bind((host,port))
      
